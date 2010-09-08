@@ -5,7 +5,7 @@ To use it, do this:
   (ql:quickload "quicklisp-slime-helper")
   (quicklisp-slime-helper:install)
 
-It will a file in the Quicklisp base directory called
+It will create a file in the Quicklisp base directory called
 "slime-helper.el". That file will search the quicklisp-slime-helper
 dist for an installed slime.el file, and add its directory to the
 Emacs load-path.
