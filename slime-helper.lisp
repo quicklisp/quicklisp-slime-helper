@@ -16,7 +16,7 @@
                                                :type "el"))
         (target (qmerge "slime-helper.el")))
     (copy-file source target)
-    (format t "slime-helper.el installed in ~S~%~%"
+    (format t "~&slime-helper.el installed in ~S~%~%"
             (namestring target))
     (let ((enough (enough-namestring target (user-homedir-pathname))))
       (unless (equal (pathname enough) target)
