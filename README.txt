@@ -1,14 +1,13 @@
-This project is for making it easy to use SLIME in Quicklisp.
+quicklisp-slime-helper makes it easy to use SLIME from Quicklisp.
 
-To use it, do this:
+To use it, load quicklisp in your Common Lisp implementation, then
+evaluate:
 
   (ql:quickload "quicklisp-slime-helper")
-  (quicklisp-slime-helper:install)
 
-It will create a file in the Quicklisp base directory called
-"slime-helper.el". That file will search the quicklisp-slime-helper
-dist for an installed slime.el file, and add its directory to the
-Emacs load-path.
+That command will create a file in the Quicklisp base directory called
+"slime-helper.el". Loading that file will add the Quicklisp slime path
+to your Emacs load-path.
 
 In your ~/.emacs, you could have something like this:
 
@@ -17,3 +16,5 @@ In your ~/.emacs, you could have something like this:
   (slime-setup '(slime-fancy))
   (setq inferior-lisp-program "sbcl")
 
+quicklisp-slime-helper is available under the MIT license; see
+LICENSE.txt for details.
