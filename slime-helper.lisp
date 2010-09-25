@@ -5,6 +5,9 @@
   (:export #:install)
   (:shadowing-import-from #:alexandria
                           #:copy-file)
+  (:shadowing-import-from #:ql-dist
+                          #:ensure-installed
+                          #:find-system)
   (:shadowing-import-from #:ql-setup
                           #:qmerge))
 
@@ -16,6 +19,7 @@
                                                :type "el"))
         (target (qmerge "slime-helper.el")))
     (copy-file source target)
+    (ensure-installed  (find-system "swank"))
     (format t "~&slime-helper.el installed in ~S~%~%"
             (namestring target))
     (let ((enough (enough-namestring target (user-homedir-pathname))))
