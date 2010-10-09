@@ -22,9 +22,16 @@
     (ensure-installed  (find-system "swank"))
     (format t "~&slime-helper.el installed in ~S~%~%"
             (namestring target))
+    (format t "To use, add this to your ~~/.emacs:~%~%")
+    #+win32
+    (progn
+      ;; windows emacs can map ~ all over the place, see 
+      ;; http://www.gnu.org/software/emacs/windows/big.html#index-HOME-directory-49
+      ;; emit elisp so emacs calculates the right path to slime-helper.el based on where it thinks ~ is
+      (format t "  (load (expand-file-name (file-relative-name ~S (getenv \"HOME\"))))~%" (namestring target)))
+    #-win32
     (let ((enough (enough-namestring target (user-homedir-pathname))))
       (unless (equal (pathname enough) target)
         (setf enough (format nil "~~/~A" enough)))
-      (format t "To use, add this to your ~~/.emacs:~%~%")
-      (format t "  (load (expand-file-name ~S))~%" enough)
-      (format t "  (require 'slime)~%~%"))))
+      (format t "  (load (expand-file-name ~S))~%" enough))
+    (format t "  (require 'slime)~%~%")))
