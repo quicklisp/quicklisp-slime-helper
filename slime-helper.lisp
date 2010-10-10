@@ -28,7 +28,12 @@
       ;; windows emacs can map ~ all over the place, see 
       ;; http://www.gnu.org/software/emacs/windows/big.html#index-HOME-directory-49
       ;; emit elisp so emacs calculates the right path to slime-helper.el based on where it thinks ~ is
-      (format t "  (load (expand-file-name (file-relative-name ~S (getenv \"HOME\"))))~%" (namestring target)))
+      (format t "  (load ~S)~%" 
+	      (concatenate 'string
+			   #-lispworks (pathname-device (user-homedir-pathname))
+			   #+lispworks (pathname-host (user-homedir-pathname))
+			   ":"
+			   (namestring target))))
     #-win32
     (let ((enough (enough-namestring target (user-homedir-pathname))))
       (unless (equal (pathname enough) target)
