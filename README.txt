@@ -12,9 +12,7 @@ to your Emacs load-path.
 In your ~/.emacs, you could have something like this:
 
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
-  (require 'slime)
-  (slime-setup '(slime-fancy))
-  (setq inferior-lisp-program "sbcl")
+  (setq inferior-lisp-program "path/to/your/sbcl")
 
 quicklisp-slime-helper is available under the MIT license; see
 LICENSE.txt for details.

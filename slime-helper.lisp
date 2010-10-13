@@ -27,4 +27,4 @@
         (setf enough (format nil "~~/~A" enough)))
       (format t "To use, add this to your ~~/.emacs:~%~%")
       (format t "  (load (expand-file-name ~S))~%" enough)
-      (format t "  (require 'slime)~%~%"))))
+      (format t "  (setq inferior-lisp-program \"path/to/your/sbcl\")"))))
