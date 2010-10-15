@@ -23,4 +23,10 @@
         (file-name-directory (concat quicklisp-slime-helper-base
                                      relative))))))
 
-(add-to-list 'load-path (quicklisp-slime-helper-slime-directory))
+(let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
+  (add-to-list 'load-path quicklisp-slime-directory)
+  (require 'slime-autoloads)
+  (setq slime-backend (expand-file-name "swank-loader.lisp"
+                                        quicklisp-slime-directory))
+  (setq slime-path quicklisp-slime-directory)
+  (slime-setup '(slime-fancy)))
