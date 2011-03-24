@@ -7,4 +7,4 @@
 
 (defmethod perform :after ((o load-op)
                            (c (eql (find-system "quicklisp-slime-helper"))))
-  (funcall (find-symbol "INSTALL" :quicklisp-slime-helper)))
+  (funcall (read-from-string "quicklisp-slime-helper:install")))
