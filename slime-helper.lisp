@@ -19,7 +19,7 @@
                                                :type "el"))
         (target (qmerge "slime-helper.el")))
     (copy-file source target)
-    (ensure-installed  (find-system "swank"))
+    (ensure-installed (find-system "swank"))
     (format t "~&slime-helper.el installed in ~S~%~%"
             (namestring target))
     (let ((enough (enough-namestring target (user-homedir-pathname))))
@@ -27,4 +27,6 @@
         (setf enough (format nil "~~/~A" enough)))
       (format t "To use, add this to your ~~/.emacs:~%~%")
       (format t "  (load (expand-file-name ~S))~%" enough)
+      (format t "  ;; Replace \"sbcl\" with the path to your implementation~%")
+      (format t "  (setq inferior-lisp-program \"sbcl\")~%")
       (format t "~%"))))
