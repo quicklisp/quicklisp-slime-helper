@@ -1,7 +1,8 @@
 ;;;; This file was created automatically by the Quicklisp library
 ;;;; "quicklisp-slime-helper" from the "quicklisp" dist.
 
-(setq quicklisp-slime-helper-dist "quicklisp")
+(unless (boundp 'quicklisp-slime-helper-dist)
+  (setq quicklisp-slime-helper-dist "quicklisp"))
 
 (setq quicklisp-slime-helper-base
       (if load-file-name
@@ -13,15 +14,20 @@
     (insert-file-contents file)
     (buffer-string)))
 
-(defun quicklisp-slime-helper-slime-directory ()
+(defun quicklisp-slime-helper-system-directory (system)
   (let ((location-file (concat quicklisp-slime-helper-base
                                "dists/"
                                quicklisp-slime-helper-dist
-                               "/installed/systems/swank.txt")))
+                               "/installed/systems/"
+                               system
+                               ".txt")))
     (when (file-exists-p location-file)
       (let ((relative (quicklisp-slime-helper-file-contents location-file)))
         (file-name-directory (concat quicklisp-slime-helper-base
                                      relative))))))
+
+(defun quicklisp-slime-helper-slime-directory ()
+  (quicklisp-slime-helper-system-directory "swank"))
 
 (let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
   (add-to-list 'load-path quicklisp-slime-directory)
