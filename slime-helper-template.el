@@ -27,7 +27,11 @@
                                      relative))))))
 
 (defun quicklisp-slime-helper-slime-directory ()
-  (quicklisp-slime-helper-system-directory "swank"))
+  (let ((local-slime-dir (concat quicklisp-slime-helper-base
+                                 "local-projects/slime/")))
+    (if (file-exists-p local-slime-dir)
+        local-slime-dir
+      (quicklisp-slime-helper-system-directory "swank"))))
 
 (let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
   (add-to-list 'load-path quicklisp-slime-directory)
