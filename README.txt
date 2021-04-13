@@ -11,6 +11,8 @@ to your Emacs load-path.
 
 In your ~/.emacs, you could have something like this:
 
+  ;; To customize the loaded contribs, set slime-contribs like so:
+  ;; (setq slime-contribs '(slime-fancy))
   (load (expand-file-name "~/quicklisp/slime-helper.el"))
   (setq inferior-lisp-program "sbcl")
 
