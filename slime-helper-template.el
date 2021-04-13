@@ -35,4 +35,6 @@
   (setq slime-backend (expand-file-name "swank-loader.lisp"
                                         quicklisp-slime-directory))
   (setq slime-path quicklisp-slime-directory)
-  (slime-setup '(slime-fancy)))
+  (if (boundp 'slime-contribs)
+      (slime-setup slime-contribs)
+    (slime-setup '(slime-fancy))))
