@@ -29,10 +29,14 @@
 (defun quicklisp-slime-helper-slime-directory ()
   (quicklisp-slime-helper-system-directory "swank"))
 
-(let* ((quicklisp-slime-directory (quicklisp-slime-helper-slime-directory)))
-  (add-to-list 'load-path quicklisp-slime-directory)
-  (require 'slime-autoloads)
-  (setq slime-backend (expand-file-name "swank-loader.lisp"
-                                        quicklisp-slime-directory))
-  (setq slime-path quicklisp-slime-directory)
-  (slime-setup '(slime-fancy)))
+(let* ((installed-slime (locate-library "slime"))
+       (quicklisp-slime-directory (if installed-slime
+                                      (file-name-directory (locate-library "slime"))
+                                    (quicklisp-slime-helper-slime-directory))))
+  (if (not installed-slime)
+      (add-to-list 'load-path quicklisp-slime-directory))
+(require 'slime-autoloads)
+(setq slime-backend (expand-file-name "swank-loader.lisp"
+                                      quicklisp-slime-directory))
+(setq slime-path quicklisp-slime-directory)
+(slime-setup '(slime-fancy))
